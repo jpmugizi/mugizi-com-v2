@@ -20,8 +20,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <span class="intro-label">About</span>
         <h1 class="greeting">Hello, I'm JP Mugizi</h1>
         <p class="intro-text">
-          A software engineer with a focus on data, cloud infrastructure, and distributed systems.
-          Born and raised in Kigali, Rwanda, currently based in Atlanta, GA.
+          Co-Founder & CTO at <a href="https://usebaza.com" target="_blank" rel="noopener">Baza Analytics</a>,
+          building an AI-native business intelligence platform for African businesses.
         </p>
       </div>
     </header>
@@ -43,11 +43,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <div class="section">
-        <h2 class="section-title">Experience</h2>
+        <h2 class="section-title">Now</h2>
         <div class="section-content">
-          <p>
-            Previously, I've worked at companies building products that matter:
-          </p>
+          <a href="https://usebaza.com" target="_blank" rel="noopener" class="company-link featured">
+            <div class="company-info">
+              <span class="company-name">Baza Analytics</span>
+              <span class="company-role">Co-Founder & CTO</span>
+            </div>
+            <span class="company-desc">AI-native business intelligence for African businesses</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Previously</h2>
+        <div class="section-content">
           <ul class="company-list">
             <li>
               <a href="https://chippercash.com" target="_blank" rel="noopener" class="company-link">
@@ -84,11 +94,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <div class="section">
-        <h2 class="section-title">Get in touch</h2>
+        <h2 class="section-title">Connect</h2>
         <div class="section-content">
-          <p>
-            Feel free to reach out if you'd like to connect or collaborate.
-          </p>
           <div class="contact-links">
             <a href="https://linkedin.com/in/jpmugizi" target="_blank" rel="noopener" class="contact-link">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -104,16 +111,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               </svg>
               GitHub
             </a>
-            <a href="https://twitter.com/jpmugizi" target="_blank" rel="noopener" class="contact-link">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/>
-              </svg>
-              X / Twitter
-            </a>
           </div>
         </div>
       </div>
     </div>
+
+    <footer class="about-footer">
+      <div class="locations">
+        <span class="location-item">
+          <span class="flag">🇺🇸</span>
+          Atlanta, Georgia
+        </span>
+        <span class="location-divider"></span>
+        <span class="location-item">
+          <span class="flag">🇰🇪</span>
+          Nairobi, Kenya
+        </span>
+      </div>
+    </footer>
   </section>
 </BaseLayout>
 
@@ -243,10 +258,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     transition: all 0.2s var(--ease-out-quart);
   }
 
+  .company-link.featured {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, var(--cream-dark) 0%, color-mix(in srgb, var(--terracotta) 8%, var(--cream-dark)) 100%);
+    border: 1px solid color-mix(in srgb, var(--terracotta) 20%, transparent);
+  }
+
+  .company-link.featured .company-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .company-link.featured .company-name {
+    font-size: 1.125rem;
+  }
+
+  .company-link.featured .company-role {
+    font-size: 0.8125rem;
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+
+  .company-desc {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
   .company-link:hover {
     text-decoration: none;
     border-color: var(--border-strong);
     transform: translateX(4px);
+  }
+
+  .company-link.featured:hover {
+    border-color: var(--terracotta);
   }
 
   .company-name {
@@ -266,7 +316,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .contact-links {
     display: flex;
     gap: 1rem;
-    margin-top: 1.5rem;
   }
 
   .contact-link {
@@ -332,6 +381,47 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   }
 
+  .about-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .locations {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .location-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+  }
+
+  .flag {
+    font-size: 1.25rem;
+  }
+
+  .location-divider {
+    width: 4px;
+    height: 4px;
+    background-color: var(--border-strong);
+    border-radius: 50%;
+  }
+
+  .intro-text a {
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+
+  .intro-text a:hover {
+    text-decoration: underline;
+  }
+
   @media (max-width: 480px) {
     .contact-links {
       flex-direction: column;
@@ -345,6 +435,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       flex-direction: column;
       align-items: flex-start;
       gap: 0.25rem;
+    }
+
+    .company-link.featured {
+      flex-direction: column;
+    }
+
+    .company-link.featured .company-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+
+    .locations {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .location-divider {
+      display: none;
     }
   }
 </style>
