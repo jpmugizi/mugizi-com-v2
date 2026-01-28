@@ -30,7 +30,7 @@
 
   --max-width: 1100px;
   --content-width: 720px;
-  --header-height: 72px;
+  --header-height: 56px;
 
   /* Animation curves */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -127,7 +127,7 @@ img {
 /* Main content area */
 main {
   padding-top: 0;
-  padding-bottom: 6rem;
+  padding-bottom: 4rem;
 }
 
 /* Utility classes */
