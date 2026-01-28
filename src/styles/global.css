@@ -8,9 +8,9 @@
   --cream: #faf8f5;
   --cream-dark: #f0ece4;
   --cream-darker: #e5dfd4;
-  --terracotta: #c9593a;
-  --terracotta-light: #d96f4f;
-  --terracotta-dark: #a84830;
+  --terracotta: #b85a3d;
+  --terracotta-light: #c96d52;
+  --terracotta-dark: #9a4a32;
   --sage: #7a9178;
   --gold: #c4a35a;
   --text-primary: var(--ink);
@@ -24,13 +24,13 @@
   --category-career: var(--sage);
   --category-life: var(--gold);
 
-  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-display: 'Fraunces Variable', Georgia, serif;
   --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
 
   --max-width: 1100px;
   --content-width: 720px;
-  --header-height: 56px;
+  --header-height: 64px;
 
   /* Animation curves */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -75,7 +75,7 @@ body::before {
 a {
   color: var(--terracotta);
   text-decoration: none;
-  transition: color 0.2s var(--ease-out-quart);
+  transition: color 0.15s ease;
 }
 
 a:hover {
@@ -186,7 +186,7 @@ main {
 /* Prose styles for blog content */
 .prose {
   font-size: 1.125rem;
-  line-height: 1.8;
+  line-height: 1.85;
   color: var(--text-primary);
 }
 
@@ -215,7 +215,7 @@ main {
 }
 
 .prose p {
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.875rem;
 }
 
 .prose ul, .prose ol {
@@ -282,14 +282,14 @@ main {
 /* Links in prose */
 .prose a {
   text-decoration: underline;
-  text-decoration-color: var(--terracotta);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--terracotta) 40%, transparent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
   transition: text-decoration-color 0.2s ease, color 0.2s ease;
 }
 
 .prose a:hover {
-  text-decoration-color: var(--terracotta-dark);
+  text-decoration-color: var(--terracotta);
 }
 
 /* Tables */
@@ -455,7 +455,12 @@ main {
 .btn-primary:hover {
   background-color: var(--terracotta-dark);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(201, 89, 58, 0.25);
+  box-shadow: 0 4px 12px rgba(184, 90, 61, 0.25);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(184, 90, 61, 0.2);
 }
 
 .btn-secondary {
@@ -467,6 +472,10 @@ main {
 .btn-secondary:hover {
   border-color: var(--text-primary);
   background-color: var(--cream-dark);
+}
+
+.btn-secondary:active {
+  background-color: var(--cream-darker);
 }
 
 /* Card hover effect */

@@ -49,18 +49,6 @@ const categoryColor = categoryColors[post.data.category] || 'var(--terracotta)';
       {post.data.description && (
         <p class="description">{post.data.description}</p>
       )}
-
-      <div class="author">
-        <img
-          src="/images/profile.svg"
-          alt="JP Mugizi"
-          class="author-photo"
-        />
-        <div class="author-info">
-          <span class="author-name">JP Mugizi</span>
-          <span class="author-role">Software Engineer</span>
-        </div>
-      </div>
     </header>
 
     <div class="post-content prose">
@@ -153,39 +141,8 @@ const categoryColor = categoryColors[post.data.category] || 'var(--terracotta)';
     font-size: 1.1875rem;
     color: var(--text-secondary);
     line-height: 1.6;
-    margin: 0 0 2rem 0;
+    margin: 0;
     max-width: 600px;
-  }
-
-  .author {
-    display: flex;
-    align-items: center;
-    gap: 0.875rem;
-  }
-
-  .author-photo {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--cream-dark);
-  }
-
-  .author-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-  }
-
-  .author-name {
-    font-weight: 500;
-    color: var(--text-primary);
-    font-size: 0.9375rem;
-  }
-
-  .author-role {
-    font-size: 0.8125rem;
-    color: var(--text-muted);
   }
 
   .post-content {
