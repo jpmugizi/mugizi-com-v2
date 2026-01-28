@@ -1,0 +1,75 @@
+---
+interface Props {
+  title: string;
+  date: Date;
+  category: string;
+  slug: string;
+}
+
+const { title, date, category, slug } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric'
+}).toUpperCase().replace(',', '');
+---
+
+<a href={`/blog/${slug}`} class="post-card">
+  <div class="post-card-inner">
+    <span class="date">{formattedDate}</span>
+    <h3 class="title">{title}</h3>
+    <span class="category">{category.toUpperCase()}</span>
+  </div>
+</a>
+
+<style>
+  .post-card {
+    display: block;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.15s ease;
+  }
+
+  .post-card:hover {
+    background-color: var(--card-hover);
+    text-decoration: none;
+    margin: 0 -1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .post-card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .date {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+  }
+
+  .title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .post-card:hover .title {
+    color: var(--accent);
+  }
+
+  .category {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+  }
+</style>

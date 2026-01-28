@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About" description="About JP Mugizi - Software engineer focused on data, cloud infrastructure, and distributed systems.">
+  <section class="about">
+    <div class="intro">
+      <div class="photo-container">
+        <img
+          src="/images/profile.svg"
+          alt="JP Mugizi"
+          class="profile-photo"
+        />
+      </div>
+      <h1 class="greeting">Hello, welcome!</h1>
+    </div>
+
+    <div class="bio">
+      <p>
+        My name is JP Mugizi. I'm a software engineer with a focus on data,
+        cloud infrastructure, and distributed systems. I was born and raised
+        in Kigali, Rwanda but currently based out of Atlanta, GA.
+      </p>
+      <p>
+        Previously, I was at
+        <a href="https://chippercash.com" target="_blank" rel="noopener">Chipper Cash</a>,
+        <a href="https://mailchimp.com" target="_blank" rel="noopener">Intuit Mailchimp</a>,
+        <a href="https://capitalone.com" target="_blank" rel="noopener">Capital One</a>,
+        <a href="https://18f.gsa.gov" target="_blank" rel="noopener">18F</a>,
+        <a href="https://login.gov" target="_blank" rel="noopener">Login.gov</a>, and
+        <a href="https://boeing.com" target="_blank" rel="noopener">Boeing</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .intro {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .photo-container {
+    flex-shrink: 0;
+  }
+
+  .profile-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border-color);
+  }
+
+  .greeting {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .bio {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    max-width: 700px;
+  }
+
+  .bio p {
+    margin-bottom: 1.5rem;
+  }
+
+  .bio a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .intro {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .profile-photo {
+      width: 160px;
+      height: 160px;
+    }
+
+    .greeting {
+      font-size: 1.5rem;
+    }
+
+    .bio {
+      font-size: 1rem;
+    }
+
+    .social-links {
+      justify-content: center;
+      gap: 1.5rem;
+    }
+  }
+</style>

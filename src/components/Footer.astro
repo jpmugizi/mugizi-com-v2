@@ -1,0 +1,54 @@
+---
+
+---
+
+<footer class="footer">
+  <div class="footer-inner container">
+    <nav class="footer-links">
+      <a href="/resume.pdf" class="footer-link">Resume</a>
+      <a href="/" class="footer-link">Writings</a>
+      <a href="https://linkedin.com/in/jpmugizi" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+      <a href="https://github.com/jpmugizi" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border-color);
+    padding: 3rem 0;
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+  }
+
+  .footer-link {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 4px;
+  }
+
+  .footer-link:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .footer-links {
+      gap: 1.5rem;
+      justify-content: center;
+    }
+  }
+</style>

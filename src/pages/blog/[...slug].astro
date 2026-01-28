@@ -1,0 +1,109 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = post.data.date.toLocaleDateString('en-US', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric'
+}).toUpperCase().replace(',', '');
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="post">
+    <header class="post-header">
+      <span class="date">{formattedDate}</span>
+      <h1 class="title">{post.data.title}</h1>
+
+      <div class="author">
+        <img
+          src="/images/profile.svg"
+          alt="JP Mugizi"
+          class="author-photo"
+        />
+        <div class="author-info">
+          <span class="author-name">JP Mugizi</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="post-content prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post {
+    padding-top: 2rem;
+  }
+
+  .post-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .date {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+  }
+
+  .title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0.75rem 0 1.5rem 0;
+    line-height: 1.2;
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .author-photo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-name {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .author-role {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+
+  .post-content {
+    max-width: 100%;
+  }
+
+  @media (max-width: 640px) {
+    .title {
+      font-size: 1.75rem;
+    }
+  }
+</style>

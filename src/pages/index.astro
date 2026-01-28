@@ -1,0 +1,117 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Pagination
+const postsPerPage = 10;
+const currentPage = 1;
+const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
+const paginatedPosts = sortedPosts.slice(0, postsPerPage);
+---
+
+<BaseLayout title="Writings">
+  <section class="posts-section">
+    <header class="posts-header">
+      <h1 class="posts-title">Writings</h1>
+      {totalPages > 1 && (
+        <div class="pagination">
+          <button class="page-btn" disabled={currentPage === 1} aria-label="Previous page">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <span class="page-info">{currentPage} OF {totalPages}</span>
+          <button class="page-btn" disabled={currentPage === totalPages} aria-label="Next page">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      )}
+    </header>
+
+    {sortedPosts.length === 0 ? (
+      <p class="no-posts">No posts yet. Check back soon!</p>
+    ) : (
+      <div class="posts-list">
+        {paginatedPosts.map((post) => (
+          <PostCard
+            title={post.data.title}
+            date={post.data.date}
+            category={post.data.category}
+            slug={post.id}
+          />
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .posts-section {
+    padding-top: 2rem;
+  }
+
+  .posts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .posts-title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  /* Pagination */
+  .pagination {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .page-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .page-btn:hover:not(:disabled) {
+    color: var(--text-primary);
+    background-color: var(--card-hover);
+  }
+
+  .page-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .page-info {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+  }
+
+  .posts-list {
+    margin-top: 1rem;
+  }
+
+  .no-posts {
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+</style>

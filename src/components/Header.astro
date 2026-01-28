@@ -1,0 +1,157 @@
+---
+const pathname = Astro.url.pathname;
+---
+
+<header class="header">
+  <div class="header-inner container">
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 5H18M2 10H18M2 15H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <a href="/" class="logo">
+      <span class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
+          <circle cx="16" cy="16" r="6" fill="currentColor"/>
+          <circle cx="16" cy="4" r="2" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="logo-text">mugizi<span class="logo-dot">.com</span></span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="/" class:list={[{ active: pathname === '/' }]}>Writings</a>
+      <a href="/about" class:list={[{ active: pathname === '/about' }]}>About</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    position: relative;
+  }
+
+  .menu-toggle {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.15s ease;
+  }
+
+  .menu-toggle:hover {
+    background-color: var(--card-hover);
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+  }
+
+  .logo:hover {
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    display: flex;
+    align-items: center;
+    color: var(--accent);
+    opacity: 0.9;
+    transition: transform 0.3s ease;
+  }
+
+  .logo:hover .logo-icon {
+    transform: rotate(180deg);
+  }
+
+  .logo-text {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .logo-dot {
+    color: var(--text-secondary);
+    font-weight: 400;
+    font-size: 0.9em;
+  }
+
+  .nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav a {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    transition: color 0.15s ease;
+  }
+
+  .nav a:hover,
+  .nav a.active {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  @media (max-width: 640px) {
+    .nav {
+      display: none;
+    }
+
+    .nav.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      background-color: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 1.5rem;
+      gap: 1rem;
+    }
+  }
+
+  @media (min-width: 641px) {
+    .menu-toggle {
+      visibility: hidden;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav');
+
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    nav?.classList.toggle('open');
+  });
+</script>

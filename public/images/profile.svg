@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="warmGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff8c00;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#ff6b35;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f7931e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1f2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1117;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="200" cy="200" r="200" fill="url(#bgGradient)"/>
+
+  <!-- Decorative rings -->
+  <circle cx="200" cy="200" r="180" fill="none" stroke="url(#warmGradient)" stroke-width="1" opacity="0.3"/>
+  <circle cx="200" cy="200" r="160" fill="none" stroke="url(#warmGradient)" stroke-width="0.5" opacity="0.2"/>
+
+  <!-- Floating geometric accents -->
+  <circle cx="320" cy="100" r="8" fill="url(#warmGradient)" opacity="0.6"/>
+  <circle cx="80" cy="300" r="5" fill="url(#warmGradient)" opacity="0.4"/>
+  <circle cx="340" cy="280" r="4" fill="url(#warmGradient)" opacity="0.5"/>
+  <circle cx="60" cy="120" r="6" fill="url(#warmGradient)" opacity="0.3"/>
+
+  <!-- Small decorative dots -->
+  <circle cx="150" cy="80" r="3" fill="#ff8c00" opacity="0.4"/>
+  <circle cx="280" cy="320" r="3" fill="#ff8c00" opacity="0.4"/>
+
+  <!-- Main initials with style -->
+  <text x="200" y="230"
+        font-family="'Nunito Sans', -apple-system, sans-serif"
+        font-size="120"
+        font-weight="700"
+        fill="url(#warmGradient)"
+        text-anchor="middle"
+        filter="url(#glow)">
+    JP
+  </text>
+
+  <!-- Subtle underline accent -->
+  <rect x="130" y="260" width="140" height="3" rx="1.5" fill="url(#warmGradient)" opacity="0.6"/>
+
+  <!-- Corner accent lines -->
+  <path d="M50 80 L80 80 L80 50" fill="none" stroke="url(#warmGradient)" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+  <path d="M350 320 L320 320 L320 350" fill="none" stroke="url(#warmGradient)" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+</svg>
