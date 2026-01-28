@@ -4,104 +4,341 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout title="About" description="About JP Mugizi - Software engineer focused on data, cloud infrastructure, and distributed systems.">
   <section class="about">
-    <div class="intro">
-      <div class="photo-container">
-        <img
-          src="/images/profile.svg"
-          alt="JP Mugizi"
-          class="profile-photo"
-        />
+    <header class="about-header">
+      <div class="photo-wrapper">
+        <div class="photo-frame">
+          <img
+            src="/images/profile.svg"
+            alt="JP Mugizi"
+            class="profile-photo"
+          />
+        </div>
+        <div class="photo-decoration" aria-hidden="true"></div>
       </div>
-      <h1 class="greeting">Hello, welcome!</h1>
-    </div>
 
-    <div class="bio">
-      <p>
-        My name is JP Mugizi. I'm a software engineer with a focus on data,
-        cloud infrastructure, and distributed systems. I was born and raised
-        in Kigali, Rwanda but currently based out of Atlanta, GA.
-      </p>
-      <p>
-        Previously, I was at
-        <a href="https://chippercash.com" target="_blank" rel="noopener">Chipper Cash</a>,
-        <a href="https://mailchimp.com" target="_blank" rel="noopener">Intuit Mailchimp</a>,
-        <a href="https://capitalone.com" target="_blank" rel="noopener">Capital One</a>,
-        <a href="https://18f.gsa.gov" target="_blank" rel="noopener">18F</a>,
-        <a href="https://login.gov" target="_blank" rel="noopener">Login.gov</a>, and
-        <a href="https://boeing.com" target="_blank" rel="noopener">Boeing</a>.
-      </p>
+      <div class="intro-content">
+        <span class="intro-label">About</span>
+        <h1 class="greeting">Hello, I'm JP Mugizi</h1>
+        <p class="intro-text">
+          A software engineer with a focus on data, cloud infrastructure, and distributed systems.
+          Born and raised in Kigali, Rwanda, currently based in Atlanta, GA.
+        </p>
+      </div>
+    </header>
+
+    <div class="about-body">
+      <div class="section">
+        <h2 class="section-title">Background</h2>
+        <div class="section-content">
+          <p>
+            I've spent my career building systems that handle data at scale. I enjoy the challenge of
+            designing architectures that are both performant and maintainable, and I'm particularly
+            interested in the intersection of data engineering and infrastructure.
+          </p>
+          <p>
+            When I'm not writing code, I enjoy exploring new places, learning about different cultures,
+            and thinking about how technology can solve real-world problems.
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Experience</h2>
+        <div class="section-content">
+          <p>
+            Previously, I've worked at companies building products that matter:
+          </p>
+          <ul class="company-list">
+            <li>
+              <a href="https://chippercash.com" target="_blank" rel="noopener" class="company-link">
+                <span class="company-name">Chipper Cash</span>
+                <span class="company-role">Fintech for Africa</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://mailchimp.com" target="_blank" rel="noopener" class="company-link">
+                <span class="company-name">Intuit Mailchimp</span>
+                <span class="company-role">Marketing platform</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://capitalone.com" target="_blank" rel="noopener" class="company-link">
+                <span class="company-name">Capital One</span>
+                <span class="company-role">Financial services</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://18f.gsa.gov" target="_blank" rel="noopener" class="company-link">
+                <span class="company-name">18F / Login.gov</span>
+                <span class="company-role">Government digital services</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://boeing.com" target="_blank" rel="noopener" class="company-link">
+                <span class="company-name">Boeing</span>
+                <span class="company-role">Aerospace</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Get in touch</h2>
+        <div class="section-content">
+          <p>
+            Feel free to reach out if you'd like to connect or collaborate.
+          </p>
+          <div class="contact-links">
+            <a href="https://linkedin.com/in/jpmugizi" target="_blank" rel="noopener" class="contact-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/jpmugizi" target="_blank" rel="noopener" class="contact-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
   .about {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding: 4rem 0;
   }
 
-  .intro {
-    display: flex;
+  .about-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
     align-items: center;
-    gap: 2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border-color);
   }
 
-  .photo-container {
-    flex-shrink: 0;
+  .photo-wrapper {
+    position: relative;
+  }
+
+  .photo-frame {
+    position: relative;
+    z-index: 1;
   }
 
   .profile-photo {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    border-radius: 12px;
     object-fit: cover;
-    border: 3px solid var(--border-color);
+    border: 3px solid var(--cream-dark);
+    box-shadow: 0 8px 32px rgba(15, 20, 25, 0.1);
+  }
+
+  .photo-decoration {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 180px;
+    height: 180px;
+    border: 2px solid var(--terracotta);
+    border-radius: 12px;
+    opacity: 0.3;
+  }
+
+  .intro-content {
+    max-width: 500px;
+  }
+
+  .intro-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--terracotta);
+    margin-bottom: 0.75rem;
   }
 
   .greeting {
-    font-size: 2rem;
-    font-weight: 600;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 400;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+  }
+
+  .intro-text {
+    font-size: 1.0625rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
     margin: 0;
   }
 
-  .bio {
-    font-size: 1.125rem;
+  .about-body {
+    max-width: var(--content-width);
+  }
+
+  .section {
+    margin-bottom: 3rem;
+  }
+
+  .section:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0 0 1.25rem 0;
+    color: var(--text-primary);
+  }
+
+  .section-content {
+    font-size: 1.0625rem;
     line-height: 1.75;
-    max-width: 700px;
   }
 
-  .bio p {
-    margin-bottom: 1.5rem;
+  .section-content p {
+    margin-bottom: 1.25rem;
   }
 
-  .bio a {
-    text-decoration: underline;
-    text-underline-offset: 2px;
+  .section-content p:last-child {
+    margin-bottom: 0;
   }
 
-  @media (max-width: 640px) {
-    .intro {
-      flex-direction: column;
+  .company-list {
+    list-style: none;
+    margin: 1.5rem 0 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .company-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background-color: var(--cream-dark);
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.2s var(--ease-out-quart);
+  }
+
+  .company-link:hover {
+    text-decoration: none;
+    border-color: var(--border-strong);
+    transform: translateX(4px);
+  }
+
+  .company-name {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .company-link:hover .company-name {
+    color: var(--terracotta);
+  }
+
+  .company-role {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background-color: var(--cream-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s var(--ease-out-quart);
+  }
+
+  .contact-link:hover {
+    text-decoration: none;
+    border-color: var(--terracotta);
+    color: var(--terracotta);
+    background-color: color-mix(in srgb, var(--terracotta) 5%, var(--cream-dark));
+  }
+
+  .contact-link svg {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .about {
+      padding: 2rem 0;
+    }
+
+    .about-header {
+      grid-template-columns: 1fr;
       text-align: center;
+      gap: 2rem;
+    }
+
+    .photo-wrapper {
+      justify-self: center;
     }
 
     .profile-photo {
-      width: 160px;
-      height: 160px;
+      width: 150px;
+      height: 150px;
+    }
+
+    .photo-decoration {
+      width: 150px;
+      height: 150px;
+    }
+
+    .intro-content {
+      max-width: none;
     }
 
     .greeting {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
     }
 
-    .bio {
+    .intro-text {
       font-size: 1rem;
     }
+  }
 
-    .social-links {
+  @media (max-width: 480px) {
+    .contact-links {
+      flex-direction: column;
+    }
+
+    .contact-link {
       justify-content: center;
-      gap: 1.5rem;
+    }
+
+    .company-link {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
     }
   }
 </style>

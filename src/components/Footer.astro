@@ -4,51 +4,184 @@
 
 <footer class="footer">
   <div class="footer-inner container">
-    <nav class="footer-links">
-      <a href="/resume.pdf" class="footer-link">Resume</a>
-      <a href="/" class="footer-link">Writings</a>
-      <a href="https://linkedin.com/in/jpmugizi" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
-      <a href="https://github.com/jpmugizi" target="_blank" rel="noopener" class="footer-link">GitHub</a>
-    </nav>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="footer-logo">mugizi</span>
+        <p class="footer-tagline">Building systems that scale.</p>
+      </div>
+
+      <nav class="footer-nav">
+        <div class="footer-col">
+          <span class="footer-col-title">Navigate</span>
+          <a href="/" class="footer-link">Writings</a>
+          <a href="/about" class="footer-link">About</a>
+          <a href="/resume.pdf" class="footer-link">Resume</a>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-col-title">Connect</span>
+          <a href="https://linkedin.com/in/jpmugizi" target="_blank" rel="noopener" class="footer-link">
+            LinkedIn
+            <svg class="external-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M3.5 8.5L8.5 3.5M8.5 3.5H4.5M8.5 3.5V7.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="https://github.com/jpmugizi" target="_blank" rel="noopener" class="footer-link">
+            GitHub
+            <svg class="external-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M3.5 8.5L8.5 3.5M8.5 3.5H4.5M8.5 3.5V7.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="copyright">&copy; {new Date().getFullYear()} JP Mugizi</span>
+      <span class="location">Atlanta, GA</span>
+    </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    border-top: 1px solid var(--border-color);
-    padding: 3rem 0;
     margin-top: auto;
+    border-top: 1px solid var(--border-color);
+    background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
   }
 
   .footer-inner {
-    display: flex;
-    justify-content: center;
+    padding: 4rem 2rem 2rem;
   }
 
-  .footer-links {
+  .footer-content {
     display: flex;
-    flex-wrap: wrap;
-    gap: 2.5rem;
+    justify-content: space-between;
+    gap: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand {
+    max-width: 280px;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-tagline {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .footer-nav {
+    display: flex;
+    gap: 4rem;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .footer-col-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
   }
 
   .footer-link {
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-primary);
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
-    text-underline-offset: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
   }
 
   .footer-link:hover {
-    color: var(--accent);
+    color: var(--terracotta);
+    text-decoration: none;
   }
 
-  @media (max-width: 640px) {
-    .footer-links {
-      gap: 1.5rem;
-      justify-content: center;
+  .external-icon {
+    opacity: 0.5;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .footer-link:hover .external-icon {
+    opacity: 1;
+    transform: translate(1px, -1px);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .copyright,
+  .location {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+
+  .location {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .location::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--sage);
+    border-radius: 50%;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .footer-brand {
+      max-width: none;
+    }
+
+    .footer-nav {
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-inner {
+      padding: 3rem 1.25rem 1.5rem;
+    }
+
+    .footer-nav {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 0.75rem;
+      text-align: center;
     }
   }
 </style>

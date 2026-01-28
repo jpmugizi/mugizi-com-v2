@@ -11,6 +11,7 @@
   "dependencies": {
     "@fontsource/dm-mono": "^5.2.7",
     "@fontsource/dm-sans": "^5.2.8",
+    "@fontsource/dm-serif-display": "^5.2.8",
     "@fontsource/fira-code": "^5.2.7",
     "@fontsource/geist-mono": "^5.2.7",
     "@fontsource/geist-sans": "^5.2.5",
@@ -22,6 +23,7 @@
     "@fontsource/manrope": "^5.2.8",
     "@fontsource/nunito-sans": "^5.2.7",
     "@fontsource/open-sans": "^5.2.7",
+    "@fontsource/outfit": "^5.2.8",
     "@fontsource/plus-jakarta-sans": "^5.2.8",
     "@fontsource/roboto": "^5.2.9",
     "@fontsource/roboto-mono": "^5.2.8",
