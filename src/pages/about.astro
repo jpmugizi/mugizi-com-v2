@@ -93,42 +93,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
       </div>
 
-      <div class="section">
+      <div class="section connect-section">
         <h2 class="section-title">Connect</h2>
-        <div class="section-content">
-          <div class="contact-links">
-            <a href="https://linkedin.com/in/jpmugizi" target="_blank" rel="noopener" class="contact-link">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="1.5"/>
-                <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/>
-              </svg>
-              LinkedIn
-            </a>
-            <a href="https://github.com/jpmugizi" target="_blank" rel="noopener" class="contact-link">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              GitHub
-            </a>
-          </div>
+        <div class="contact-links">
+          <a href="https://linkedin.com/in/jpmugizi" target="_blank" rel="noopener" class="contact-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/jpmugizi" target="_blank" rel="noopener" class="contact-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            GitHub
+          </a>
         </div>
       </div>
     </div>
-
-    <footer class="about-footer">
-      <div class="locations">
-        <span class="location-item">
-          <span class="flag">🇺🇸</span>
-          Atlanta, Georgia
-        </span>
-        <span class="location-divider"></span>
-        <span class="location-item">
-          <span class="flag">🇰🇪</span>
-          Nairobi, Kenya
-        </span>
-      </div>
-    </footer>
   </section>
 </BaseLayout>
 
@@ -313,22 +297,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--text-muted);
   }
 
+  .connect-section {
+    margin-bottom: 0;
+  }
+
+  .connect-section .section-title {
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+  }
+
   .contact-links {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
   .contact-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.625rem;
-    padding: 0.75rem 1.25rem;
-    font-size: 0.9375rem;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
     font-weight: 500;
-    color: var(--text-primary);
-    background-color: var(--cream-dark);
+    color: var(--text-secondary);
+    background-color: transparent;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 6px;
     transition: all 0.2s var(--ease-out-quart);
   }
 
@@ -336,7 +329,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-decoration: none;
     border-color: var(--terracotta);
     color: var(--terracotta);
-    background-color: color-mix(in srgb, var(--terracotta) 5%, var(--cream-dark));
   }
 
   .contact-link svg {
@@ -381,38 +373,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   }
 
-  .about-footer {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border-color);
-  }
-
-  .locations {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-  }
-
-  .location-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9375rem;
-    color: var(--text-secondary);
-  }
-
-  .flag {
-    font-size: 1.25rem;
-  }
-
-  .location-divider {
-    width: 4px;
-    height: 4px;
-    background-color: var(--border-strong);
-    border-radius: 50%;
-  }
-
   .intro-text a {
     color: var(--terracotta);
     font-weight: 500;
@@ -445,15 +405,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       flex-direction: column;
       align-items: flex-start;
       gap: 0.25rem;
-    }
-
-    .locations {
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .location-divider {
-      display: none;
     }
   }
 </style>
