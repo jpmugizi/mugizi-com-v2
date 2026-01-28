@@ -1,0 +1,213 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = post.data.date.toLocaleDateString('en-US', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+});
+
+const categoryColors: Record<string, string> = {
+  engineering: 'var(--category-engineering)',
+  career: 'var(--category-career)',
+  life: 'var(--category-life)',
+};
+
+const categoryColor = categoryColors[post.data.category] || 'var(--terracotta)';
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="post" style={`--category-color: ${categoryColor}`}>
+    <header class="post-header">
+      <a href="/" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to writings
+      </a>
+
+      <div class="post-meta">
+        <span class="category-badge">{post.data.category}</span>
+        <span class="separator">|</span>
+        <time class="date" datetime={post.data.date.toISOString()}>{formattedDate}</time>
+      </div>
+
+      <h1 class="title">{post.data.title}</h1>
+
+      {post.data.description && (
+        <p class="description">{post.data.description}</p>
+      )}
+    </header>
+
+    <div class="post-content prose">
+      <Content />
+    </div>
+
+    <footer class="post-footer">
+      <div class="footer-divider"></div>
+      <div class="footer-content">
+        <p class="footer-text">Thanks for reading. If you found this useful, feel free to share it.</p>
+        <a href="/" class="footer-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Read more articles
+        </a>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .post {
+    padding-top: 2rem;
+    max-width: var(--content-width);
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--terracotta);
+    text-decoration: none;
+  }
+
+  .post-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .category-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--category-color);
+    background-color: color-mix(in srgb, var(--category-color) 10%, transparent);
+    padding: 0.25rem 0.625rem;
+    border-radius: 3px;
+  }
+
+  .separator {
+    color: var(--border-strong);
+  }
+
+  .date {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    margin: 0 0 1rem 0;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .description {
+    font-size: 1.1875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 600px;
+  }
+
+  .post-content {
+    max-width: 100%;
+  }
+
+  .post-footer {
+    margin-top: 4rem;
+  }
+
+  .footer-divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--category-color), transparent);
+    margin-bottom: 2rem;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .footer-text {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--terracotta);
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .footer-link:hover {
+    text-decoration: none;
+  }
+
+  .footer-link svg {
+    transition: transform 0.2s ease;
+  }
+
+  .footer-link:hover svg {
+    transform: translateX(-3px);
+  }
+
+  @media (max-width: 640px) {
+    .title {
+      font-size: 1.75rem;
+    }
+
+    .description {
+      font-size: 1.0625rem;
+    }
+
+    .footer-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,220 @@
+---
+const pathname = Astro.url.pathname;
+---
+
+<header class="header">
+  <div class="header-inner container">
+    <a href="/" class="logo">
+      <span class="logo-text">mugizi<span class="logo-tld">.com</span></span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="/" class:list={['nav-link', { active: pathname === '/' }]}>
+        <span class="nav-text">writings</span>
+        <span class="nav-indicator"></span>
+      </a>
+      <a href="/about" class:list={['nav-link', { active: pathname === '/about' }]}>
+        <span class="nav-text">about</span>
+        <span class="nav-indicator"></span>
+      </a>
+    </nav>
+
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span class="hamburger">
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--cream);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--border-strong) 20%,
+      var(--border-strong) 80%,
+      transparent 100%
+    );
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    color: var(--text-primary);
+    transition: opacity 0.2s ease;
+  }
+
+  .logo:hover {
+    opacity: 0.7;
+    text-decoration: none;
+  }
+
+  .logo-text {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .logo-tld {
+    color: var(--terracotta);
+    font-weight: 300;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+
+  .logo:hover .logo-tld {
+    opacity: 1;
+  }
+
+  .nav {
+    display: flex;
+    gap: 3rem;
+  }
+
+  .nav-link {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-primary);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--terracotta);
+    text-decoration: none;
+  }
+
+  .nav-indicator {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--terracotta);
+    transition: all 0.3s var(--ease-out-expo);
+    transform: translateX(-50%);
+    border-radius: 1px;
+  }
+
+  .nav-link:hover .nav-indicator,
+  .nav-link.active .nav-indicator {
+    width: 100%;
+  }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-right: -0.5rem;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 24px;
+  }
+
+  .hamburger span {
+    display: block;
+    height: 2px;
+    background-color: var(--text-primary);
+    border-radius: 1px;
+    transition: all 0.3s var(--ease-out-expo);
+  }
+
+  .hamburger span:first-child {
+    width: 100%;
+  }
+
+  .hamburger span:last-child {
+    width: 60%;
+    margin-left: auto;
+  }
+
+  .menu-toggle:hover .hamburger span:last-child {
+    width: 100%;
+  }
+
+  .menu-toggle[aria-expanded="true"] .hamburger span:first-child {
+    transform: translateY(4px) rotate(45deg);
+  }
+
+  .menu-toggle[aria-expanded="true"] .hamburger span:last-child {
+    width: 100%;
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  @media (max-width: 640px) {
+    .nav {
+      display: none;
+      position: absolute;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background-color: var(--cream);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.5rem 2rem;
+      gap: 1.25rem;
+    }
+
+    .nav.open {
+      display: flex;
+    }
+
+    .nav-link {
+      align-items: flex-start;
+      font-size: 1.0625rem;
+    }
+
+    .nav-indicator {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav');
+
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    nav?.classList.toggle('open');
+  });
+</script>

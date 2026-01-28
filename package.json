@@ -1,0 +1,37 @@
+{
+  "name": "macau",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource-variable/fraunces": "^5.2.9",
+    "@fontsource/dm-mono": "^5.2.7",
+    "@fontsource/dm-sans": "^5.2.8",
+    "@fontsource/dm-serif-display": "^5.2.8",
+    "@fontsource/fira-code": "^5.2.7",
+    "@fontsource/geist-mono": "^5.2.7",
+    "@fontsource/geist-sans": "^5.2.5",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@fontsource/ibm-plex-sans": "^5.2.8",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "@fontsource/lato": "^5.2.7",
+    "@fontsource/manrope": "^5.2.8",
+    "@fontsource/nunito-sans": "^5.2.7",
+    "@fontsource/open-sans": "^5.2.7",
+    "@fontsource/outfit": "^5.2.8",
+    "@fontsource/plus-jakarta-sans": "^5.2.8",
+    "@fontsource/roboto": "^5.2.9",
+    "@fontsource/roboto-mono": "^5.2.8",
+    "@fontsource/source-sans-3": "^5.2.9",
+    "@fontsource/space-grotesk": "^5.2.10",
+    "@fontsource/space-mono": "^5.2.9",
+    "@fontsource/work-sans": "^5.2.8",
+    "astro": "^5.16.4"
+  }
+}
