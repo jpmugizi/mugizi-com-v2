@@ -5,54 +5,64 @@ category: engineering
 description: "Best practices for managing high-throughput data systems that process 50,000 to 100,000 records per second."
 ---
 
-This post discusses best practices for managing high-throughput data systems. At peak, our streaming pipelines process 50,000 to 100,000 records per second. Network saturation during peak seasons creates operational disruptions that require rapid, coordinated responses.
+*This is a professional writing sample that  I submitted for a graduate school application. I am choosing to put it in the World.*  
 
-## Key Recommendations
+<span id="more"></span>
 
-### 1. Alerting on Critical Metrics
+## **Background**
 
-Implement monitoring alerts for problematic thresholds. Apply the Pareto principle: 80% of issues will probably be caused by 20% of the things you want to measure.
+The Data Systems Team builds and maintains multiple data pipelines that move data from several external and internal sources, in a batch or streaming fashion. At their peak, our most high volume streaming data pipelines are processing 50,000 to 100,000 records per second. Network saturation during high product utilization seasons such as year-end holidays can cause significant disruption to our data processing operations. Over the last several years of running our cloud data platforms, we have seen some team practices help our team troubleshoot and resolve issues quickly as outlined in the next section.*  *
 
-Focus your alerting on the metrics that actually matter. Too many alerts lead to alert fatigue, and important signals get lost in the noise.
+<div>
 
-### 2. Training Programs
+<div>
 
-New engineers need education on monitoring tools, Kubernetes, and cloud platforms. This happens through:
+<div>
 
-- Shadowing experienced team members during incidents
-- Comprehensive documentation of common issues and solutions
-- Hands-on exercises in staging environments
+<div>
 
-The investment in training pays off when incidents occur and team members can respond confidently.
+## **Recommendations**
 
-### 3. On-Call Rotation
+## Set up Alerting For The Most Important Metrics 
 
-A well-structured on-call rotation:
+</div>
 
-- Distributes workload fairly across the team
-- Enables knowledge sharing about potential system issues
-- Ensures someone is always available to respond
-- Prevents burnout by limiting individual exposure
+</div>
 
-### 4. Streamlined Communication
+</div>
 
-Effective incident response requires:
+</div>
 
-- Dedicated Slack channels for real-time coordination
-- Troubleshooting manuals for common scenarios
-- Post-incident retrospectives to capture learnings
-- Clear escalation paths when issues exceed team expertise
+In order to properly identify issues and resolve them quickly, you can start by adding alerting when the important metrics reach a problematic threshold. For instance, if you are aware that a significant processing lag causes issues in your data product for your customers, then add alerting so that you can quickly respond and start investigating as soon as that issue occurs. As problems occur and as you discuss them amongst your engineering team members, you will be able to add alerts over time. Focus on the pareto principle at the beginning: 80% of issues will probably because by 20% of the things you want to measure.
 
-## Cross-Team Collaboration
+<div>
 
-Interconnected systems require collaboration with adjacent teams. When troubleshooting complex issues, you'll often need to work with:
+<div>
 
-- Product engineering teams who own upstream data sources
-- Networking teams who manage infrastructure
-- Platform teams who maintain shared services
+<div>
 
-No team operates in isolation. Building relationships before incidents occur makes coordination during incidents much smoother.
+<div>
 
-## Conclusion
+### Provide Training for Monitoring and Alerting Tools 
 
-Managing high-throughput systems at scale is a team sport. The technical challenges are significant, but the organizational and communication challenges are often harder. Invest in both.
+The amount of tools and software to familiarize with, can get overwhelming especially for new engineers joining your team. To build confidence when debugging issues, provide training to engineers on all your alerting and monitoring tools. This can simply mean allowing them to shadow more senior members or providing well maintained internal documentation and other training material. This will allow your team members to focus on troubleshooting issues and get your data products to a healthy state as quickly as possible, instead of being stuck figuring out how to run simple commands. We saw positive outcomes from setting up dedicated time to provide an overview of our graphing tools, Kubernetes, and Google Cloud platform.
+
+### Implement an on call rotation 
+
+A well implemented on call rotation can serve two important purposes: knowledge sharing and spreading the workload. The former allows all engineers in your team to have at least a cursory understanding of the types of issues that can happen in your system and how to respond to them. The latter helps keep your team healthy and productive, allowing every team member to have dedicated time to work on other important tasks such as features that generate business value.
+
+  
+
+### Streamline Incident Response Communication 
+
+Our platforms are interdependent. We make sure to periodically check on other adjacent teams such as product engineering and networking. It is not unusual that a problem occuring in data systems stems from network saturation or incidents in the main product itself. Keeping communication channels open has proved to be indispensable.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+Slack, an instant messaging platform, has made it easy to troubleshoot incidents collaboratively. To avoid fragmentation and too much context switching, we created a dedicated channel to communicate around incidents and unusual events. Not only has our resolution process gotten much easier, it also helps quickly bringing new team members up to speed. We have also seen great success in creating troubleshooting manuals and conducting post-incidents retrospectives.

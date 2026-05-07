@@ -5,30 +5,16 @@ category: career
 description: "How frequent meetings and interruptions impact productivity and deep focus in creative work."
 ---
 
-Context switching disrupts productivity in modern work environments. A typical calendar filled with meetings fragments the workday into small, ineffective time slots.
+Distractions are all around us. In this day and age, it is almost impossible to carve out an uninterrupted good chunk time to work on complex projects that require deep focus. Can you relate to this calendar: one-on-one with your manager on Monday at 1pm, company all hands on Wednesday at 11am, a tech talk on Thursday at 3pm, compliance training at 2pm on Friday.Between  large meetings and other smaller ones scattered through the day, you have 1-hour slots to focus on project work. After each meeting,  your mind continues to wander; you feel distracted and not sure where you left off. By the time you come back to the present,  you realize that it is Friday at 5pm and you have not made any progress on your work. **<a href="https://blog.rescuetime.com/context-switching/" target="_blank">Context switching</a>**<a href="https://blog.rescuetime.com/context-switching/" target="_blank"> </a> is a productivity issue that affects almost everyone in a creative or analytical role. It is also personal and people deal with it differently.  
 
-Consider this: a one-on-one with your manager on Monday at 1pm, company all hands on Wednesday at 11am, a tech talk on Thursday at 3pm. Before you know it, you're left with minimal uninterrupted focus time.
+<span id="more"></span>
 
-## A Personal Study
+In computer science, a context switch is the process of storing the state of a process or thread, so that it can be restored and resume execution at a later point. So, in an essence you can think of the human brain as a computer CPU: one process would be that important monthly report or mobile app feature you were working on before you were pulled into a bi-Weekly retrospective meeting.There are lots of research  around how context switching and how it affects productivity, but in this blog I will be only focusing on my personal relationship with context switching and how I learned to preventing it from disrupting my flow state. Over a period of 3 weeks, I wrote detailed notes about how I felt and what I was exactly doing  throughout the workday. The current chaotic state of the World notwithstanding, a pattern emerged around things that were getting in the way of me getting work done.
 
-Over three weeks, I tracked my daily patterns and discovered that project initiation requires distinct phases - separating stakeholder meetings from independent research and experimentation. Mixing these activities doubled project duration.
+When I  would start a new project, I noticed that it was almost impossible trying to multi-task when I was still gathering research. For a project that had a lot of unknowns, I found it helpful to separate: (1) meetings with other teams/stakeholders about that project and (2) focused time for me to experiment and gain a better understanding of what needs to be done. For instance, let's say that I have  2 weeks to work on a project. I would schedule meetings with technical and business stakeholders in the first 2 days and then spend the next 3 days in do-not-disturb mode experimenting with technologies and diving deep into the parts of the project I understood the least. I found setting this time aside to be crucial. When I tried to mix meetings and experimentation, this would end up taking twice as long.
 
-Once the problem space became clear, switching between meetings and coding proved manageable. Strong connections around challenging tasks make context-switching less disruptive. When you deeply understand what you're working on, you can more easily pick up where you left off.
+Implementation and writing code/documentation was the easiest part. I could weave between meetings and programming just fine, once I grasped the problem space.  I am not a neuroscientist but it sounds like once my brain had made strong connections around  challenging tasks then it becomes easier to switch back and forth into them. We've all heard stories of famous writers who had to isolate themselves at a cabin in the woods just to write; maybe they were on to something.
 
-## Practical Solutions
+Almost everyone has had issues with juggling multiple projects, both personal and professional. So if you can relate to this blog, know that you are not alone. This is important because it means if you let colleagues  know that you need to disappear for a while and do some "heads down" work, they will understand. I usually need at least 3-hour increments of focused time to make progress on a project that requires a lot of brain power. If I know that I won't have that much of a block of time in a day because of a meeting, I either try to proactively schedule focus time during the week or move when meetings I can. <a href="https://www.getclockwise.com/" target="_blank">Clockwise</a> is one of the tools we have been using at work and it has been super helpful
 
-Here's what has worked for me:
-
-- **Minimum 3-hour focused blocks** for complex work. Anything less and you're just warming up before being interrupted.
-
-- **Communicate "heads down" work needs** to colleagues. Most people are understanding when you explain you need uninterrupted time for deep work.
-
-- **Use scheduling tools** like Clockwise to automatically protect focus time on your calendar.
-
-- **Track distractions** to identify patterns. You might be surprised at what's actually eating your time.
-
-## Conclusion
-
-Context switching is a winnable war. It requires self-awareness and intentional scheduling adjustments, but the payoff in productivity and quality of work is substantial.
-
-The key insight is that not all context switches are equal. Switching between related tasks is much easier than switching between completely unrelated work. Structure your day accordingly.
+Context switching is a winnable war. Recognize that the first step in defeating the enemy is understanding how they operate. If you want to understand how distractions affect your productivity, you can try what I did: take notes, pictures or audio recordings of your distractions during the day. Then, try to notice if you see a pattern that can lead to making small helpful changes. If you do, I would be interested in learning what you found out.
