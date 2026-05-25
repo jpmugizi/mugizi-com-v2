@@ -1,7 +1,7 @@
 ---
 title: "On Context Switching And Distractions"
 date: 2023-08-10
-category: career
+categories: [career]
 description: "How frequent meetings and interruptions impact productivity and deep focus in creative work."
 ---
 

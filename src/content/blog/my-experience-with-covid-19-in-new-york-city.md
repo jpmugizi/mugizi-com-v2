@@ -1,7 +1,7 @@
 ---
 title: "My Experience with COVID-19 in New York City"
 date: 2020-04-15
-category: life
+categories: [life]
 description: "A personal account of contracting COVID-19 during the pandemic's early peak in Brooklyn."
 ---
 

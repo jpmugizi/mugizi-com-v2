@@ -8,18 +8,26 @@ type Category = 'engineering' | 'career' | 'life';
 type Entry = {
   title: string;
   date: Date;
-  category: Category;
+  categories: Category[];
   description?: string;
   slug?: string;
   externalUrl?: string;
+  externalLabel?: string;
 };
 
 const externalPosts: Entry[] = [
   {
     title: 'Data Security and Stewardship at Baza In The Age of AI',
     date: new Date('2026-03-31'),
-    category: 'engineering',
+    categories: ['engineering'],
     externalUrl: 'https://www.usebaza.com/blog/data-security-stewardship',
+  },
+  {
+    title: 'AI & Digital Tools for Energy and Transport Challenges',
+    date: new Date('2026-05-25'),
+    categories: ['engineering', 'career'],
+    externalUrl: 'https://epra-undp-talk.up.railway.app/',
+    externalLabel: 'EPRA x UNDP 2026 Conference & Hackathon',
   },
 ];
 
@@ -27,7 +35,7 @@ const posts = await getCollection('blog', ({ data }) => !data.draft);
 const localEntries: Entry[] = posts.map(p => ({
   title: p.data.title,
   date: p.data.date,
-  category: p.data.category as Category,
+  categories: p.data.categories as Category[],
   description: p.data.description,
   slug: p.id,
 }));
@@ -37,7 +45,7 @@ const entries = [...localEntries, ...externalPosts].sort(
 );
 
 const counts = entries.reduce<Record<string, number>>((acc, p) => {
-  acc[p.category] = (acc[p.category] || 0) + 1;
+  for (const c of p.categories) acc[c] = (acc[c] || 0) + 1;
   return acc;
 }, {});
 const total = entries.length;
@@ -70,9 +78,10 @@ const total = entries.length;
           <PostCard
             title={entry.title}
             date={entry.date}
-            category={entry.category}
+            categories={entry.categories}
             slug={entry.slug}
             externalUrl={entry.externalUrl}
+            externalLabel={entry.externalLabel}
             description={entry.description}
             index={i}
           />
@@ -172,9 +181,8 @@ const total = entries.length;
       const filter = chip.dataset.filter;
       chips.forEach(c => c.classList.toggle('on', c === chip));
       rows.forEach(row => {
-        const tag = row.querySelector('.tag');
-        const cat = tag?.classList[1]?.replace('tag-', '');
-        const show = filter === 'all' || cat === filter;
+        const cats = (row.dataset.categories ?? '').split(' ');
+        const show = filter === 'all' || cats.includes(filter ?? '');
         row.style.display = show ? '' : 'none';
       });
     });
