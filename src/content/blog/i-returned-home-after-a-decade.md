@@ -1,7 +1,7 @@
 ---
 title: "I Returned Home After a Decade"
 date: 2017-07-20
-category: life
+categories: [life]
 description: "A journey returning to Kigali, Rwanda after ten years abroad, and the emotions of reuniting with family."
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Through the Archives: Hackathons and Startup Weekends 2011-2014"
 date: 2024-03-15
-category: life
+categories: [life]
 description: "Reflecting on hackathon experiences during college years, from building climate data visualizations to pitching startup ideas."
 ---
 

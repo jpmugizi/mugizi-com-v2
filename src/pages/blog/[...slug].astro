@@ -25,7 +25,8 @@ const categoryColors: Record<string, string> = {
   life: 'var(--category-life)',
 };
 
-const categoryColor = categoryColors[post.data.category] || 'var(--terracotta)';
+const primaryCategory = post.data.categories[0];
+const categoryColor = categoryColors[primaryCategory] || 'var(--terracotta)';
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
@@ -39,7 +40,12 @@ const categoryColor = categoryColors[post.data.category] || 'var(--terracotta)';
       </a>
 
       <div class="post-meta">
-        <span class="category-badge">{post.data.category}</span>
+        {post.data.categories.map((c, i) => (
+          <>
+            {i > 0 && <span class="category-sep">&middot;</span>}
+            <span class="category-badge">{c}</span>
+          </>
+        ))}
         <span class="separator">|</span>
         <time class="date" datetime={post.data.date.toISOString()}>{formattedDate}</time>
       </div>

@@ -1,7 +1,7 @@
 ---
 title: "Lessons From Troubleshooting High-Throughput Cloud Data Systems Collaboratively"
 date: 2023-01-25
-category: engineering
+categories: [engineering]
 description: "Best practices for managing high-throughput data systems that process 50,000 to 100,000 records per second."
 ---
 
