@@ -54,7 +54,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
-  font-size: 16px;
+  font-size: 17px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
@@ -144,8 +144,8 @@ main {
 
 .prose {
   font-family: var(--font-serif);
-  font-size: 1.1875rem;
-  line-height: 1.7;
+  font-size: 1.25rem;
+  line-height: 1.75;
   color: var(--ink);
   max-width: var(--content-width);
 }
@@ -185,18 +185,23 @@ main {
   border: 1px solid var(--rule-strong);
   overflow-x: auto;
   margin: 0 0 1.75rem;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   line-height: 1.6;
 }
 .prose pre code { background: none; padding: 0; border: none; color: inherit; }
 
 .prose blockquote {
   border-left: 2px solid var(--mark);
-  margin: 1.75rem 0;
-  padding: 0.25rem 0 0.25rem 1.5rem;
+  margin: 2rem 0;
+  padding: 0.25rem 0 0.25rem 1.75rem;
   color: var(--ink-soft);
 }
-.prose blockquote p { font-style: italic; margin-bottom: 0.75rem; }
+.prose blockquote p {
+  font-style: italic;
+  font-size: 1.375rem;
+  line-height: 1.6;
+  margin-bottom: 0.85rem;
+}
 .prose blockquote p:last-child { margin-bottom: 0; }
 
 .prose a {
@@ -239,13 +244,21 @@ main {
   margin: 1.75rem 0;
   border: 1px solid var(--rule-strong);
 }
-.prose img + em, .prose p > em:only-child {
+/* Image captions: small, centered, muted */
+.prose img + em, .prose p:has(img) + p > em:only-child {
   display: block;
   text-align: center;
   color: var(--ink-soft);
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin-top: -1rem;
   margin-bottom: 1.75rem;
+}
+
+/* Standalone italic paragraphs read as quoted passages, not captions */
+.prose p > em:only-child {
+  font-size: 1.3125rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
 }
 
 .prose hr {
@@ -268,7 +281,7 @@ main {
   margin-top: 3rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--rule);
-  font-size: 0.95rem;
+  font-size: 1.0625rem;
   color: var(--ink-soft);
 }
 .prose sup a { font-size: 0.75em; color: var(--mark); }
