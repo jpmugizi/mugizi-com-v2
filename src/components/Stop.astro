@@ -1,0 +1,156 @@
+---
+import { lines, titleParts, type Category } from '../lib/lines';
+
+interface Props {
+  title: string;
+  date: Date;
+  categories: Category[];
+  slug?: string;
+  externalUrl?: string;
+  externalLabel?: string;
+  description?: string;
+  minutes?: number;
+  showYear: boolean;
+  gap: number;
+}
+
+const { title, date, categories, slug, externalUrl, externalLabel, description, minutes, showYear, gap } = Astro.props;
+
+const isExternal = !!externalUrl;
+const href = externalUrl ?? `/blog/${slug}`;
+const host = externalUrl ? new URL(externalUrl).hostname.replace(/^www\./, '') : '';
+const dateLabel = date.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+// A stop on several lines is an interchange: one dot per line, joined by a bar.
+const lanes = categories.map((c) => lines[c].lane);
+const from = Math.min(...lanes);
+const to = Math.max(...lanes);
+const lastCategory = categories[lanes.indexOf(to)];
+const lineColor: Record<Category, string> = { engineering: '--eng', career: '--career', life: '--life' };
+---
+
+<li
+  class="stop"
+  style={`--gap: ${gap}rem; --from: var(--lane-${from}); --to: var(--lane-${to}); --c-last: var(${lineColor[lastCategory]})`}
+>
+  <span class="year">{showYear ? date.getUTCFullYear() : ''}</span>
+  <span class="tracks" aria-hidden="true">
+    {from !== to && <span class="link"></span>}
+    {categories.map((c) => <span class={`dot ${c}`}></span>)}
+  </span>
+  <a
+    href={href}
+    target={isExternal ? '_blank' : undefined}
+    rel={isExternal ? 'noopener noreferrer' : undefined}
+  >
+    <h2>{titleParts(title).map((part, i) => (i % 2 ? <span class="nw">{part}</span> : part))}</h2>
+    {description && <p class="deck">{description}</p>}
+    <p class="meta">
+      {categories.map((c, i) => (
+        <>
+          {i > 0 && ' & '}
+          <b class={`cat ${c}`}>{lines[c].name}</b>
+        </>
+      ))}
+      {' · '}<time datetime={date.toISOString().slice(0, 10)}>{dateLabel}</time>
+      {minutes && <>{' · '}{minutes} min</>}
+    </p>
+    {isExternal && <p class="meta kicker">Cross-posted &middot; {externalLabel ?? host}</p>}
+  </a>
+</li>
+
+<style>
+  .stop {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--year-w) var(--track-w) 1fr;
+    padding-bottom: var(--gap);
+  }
+  .year {
+    z-index: 1;
+    padding-top: 0.55rem;
+    font: 700 0.95rem/1 var(--font-label);
+    letter-spacing: 0.05em;
+    color: var(--soft);
+    overflow: hidden;
+  }
+  .tracks { position: relative; }
+
+  .dot {
+    position: absolute;
+    top: 0.3rem;
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-left: -0.675rem;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 4px solid var(--c);
+    z-index: 2;
+    transition: transform 0.25s var(--ease-out-quart), background-color 0.2s;
+  }
+  .dot.engineering { --c: var(--eng); left: var(--lane-0); }
+  .dot.career { --c: var(--career); left: var(--lane-1); }
+  .dot.life { --c: var(--life); left: var(--lane-2); }
+
+  .link {
+    position: absolute;
+    top: calc(0.975rem - 3px);
+    left: var(--from);
+    width: calc(var(--to) - var(--from));
+    height: 6px;
+    background: var(--ink);
+    z-index: 1;
+  }
+  /* leader from the last dot across the remaining lines to the label */
+  .tracks::after {
+    content: '';
+    position: absolute;
+    top: calc(0.975rem - 1px);
+    left: calc(var(--to) + 0.675rem);
+    width: calc(var(--track-w) - var(--to) - 0.675rem + 1rem);
+    height: 2px;
+    background: var(--c-last);
+  }
+
+  a { display: block; padding-left: 1.5rem; }
+  a:hover .dot, a:focus-visible .dot { transform: scale(1.25); }
+  .stop:hover .dot { background: var(--c); }
+
+  .kicker { margin-top: 0.3rem; color: var(--flag); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  h2 {
+    margin: 0;
+    max-width: 34rem;
+    font-size: clamp(1.45rem, 2.6vw, 1.9rem);
+    line-height: 1.15;
+    letter-spacing: -0.008em;
+  }
+  a:hover h2, a:focus-visible h2 {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--flag);
+    text-underline-offset: 0.18em;
+  }
+  .deck {
+    max-width: 36rem;
+    margin: 0.45rem 0 0.55rem;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    font-style: italic;
+    color: var(--soft);
+    text-wrap: pretty;
+  }
+  .meta { margin-top: 0.5rem; }
+  .deck + .meta { margin-top: 0; }
+  .cat { font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .cat.engineering { color: var(--eng-t); }
+  .cat.career { color: var(--career-t); }
+  .cat.life { color: var(--life-t); }
+
+  @media (max-width: 720px) {
+    a { padding-left: 1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dot { transition: none; }
+    a:hover .dot, a:focus-visible .dot { transform: none; }
+  }
+</style>
