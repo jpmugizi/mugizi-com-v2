@@ -34,20 +34,23 @@ Blog posts are managed through Astro Content Collections:
 
 ```
 src/
-├── components/          # Reusable Astro components
-│   ├── Header.astro    # Site header with navigation
-│   ├── Footer.astro    # Site footer
-│   └── PostCard.astro  # Blog post preview cards
+├── components/
+│   ├── Header.astro    # Line-map signage header, nav, day/night toggle
+│   ├── Footer.astro
+│   └── Stop.astro      # One essay as a stop on the line map (index)
 ├── layouts/
-│   └── BaseLayout.astro  # Main layout wrapper
+│   └── BaseLayout.astro
+├── lib/lines.ts        # Categories as subway lines (J engineering, P career, M life), reading time
 ├── pages/
-│   ├── index.astro     # Home page (blog listing)
-│   ├── about.astro     # About page
-│   ├── blog/[...slug].astro  # Dynamic blog post routes
+│   ├── index.astro     # Line-map index of all writing
+│   ├── about.astro
+│   ├── blog/[...slug].astro  # Essay: left "you are here" rail, margin notes
 │   └── fonts.astro     # Font-specific page
+├── scripts/
+│   ├── toc.ts          # Builds the rail from post headings
+│   └── subway.ts       # Interactive 2/3 subway embed, mounted on [data-subway]
 ├── content/blog/       # Markdown blog posts
-└── styles/
-    └── global.css      # Global styles and CSS variables
+└── styles/global.css   # Tokens and .prose styles
 ```
 
 ### Routing
@@ -58,13 +61,19 @@ src/
 
 ### Design System
 
-The site uses a dark theme with CSS custom properties:
-- Primary accent: Orange (`#ff8c00`)
-- Fonts: Nunito Sans (sans-serif), JetBrains Mono (monospace)
-- Mobile-first responsive design
+Broadsheet look on a line-map layout. See PRODUCT.md for principles.
+- Newsprint-tinted paper, iris ink, rose flag (`--flag`); Rose Pine Moon-style dark mode via `data-theme`
+- Fonts: Old Standard TT (headlines), Source Serif 4 (body), Archivo Narrow (labels), JetBrains Mono (code only)
+- Each category is a line with its own color (`--eng`, `--career`, `--life`); `-t` variants are for text
+- Embed interactive pieces in a post with raw HTML in the markdown: `<figure class="embed">` and `<div data-subway>`
+- Margin notes: `<aside class="margin">` in a post (right margin on wide screens)
 
 ### Type Safety
 
 - TypeScript strict mode enabled
 - Content collections use Zod schema validation
 - All frontmatter is type-safe through Astro's content API
+
+### Copy rules
+
+- Never add explanatory or instructional sentences around visualizations, embeds, or navigation (captions like "Schematic, not to scale", hints like "Each essay is a stop", labels like "You are here"). Readers explore on their own. The design carries the meaning.
