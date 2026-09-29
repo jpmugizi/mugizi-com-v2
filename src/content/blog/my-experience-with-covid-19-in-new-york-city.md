@@ -15,6 +15,11 @@ In February and the first week of March, life in New York City was still happeni
 
 The first Saturday of the month at the Brooklyn Museum is always the place to be, so I was there with my usual crew looking at art, dancing, and generally having a good time. The following Friday , I had dinner and a night out in Harlem with a good friend of mine who was in town visiting. Then, things changed dramatically. My employer decided that the Bay Area/Oakland and Brooklyn offices would be closed and all employees were mandated to work from home. So, I took what I could from my office desk and headed home.
 
+<figure class="embed">
+  <div data-subway></div>
+</figure>
+
+
 ### Day 1-4 of Symptoms: Flu-Like Symptoms
 
 That Saturday, I started having minor symptoms which weren’t too concerning. I have a fever of 100.4 and felt tired. My throat was starting to feel sore, but I was still carrying on with my regular life with no issues. I was on a long WhatsApp conversation with my brother and we were both in disbelief on how things just suddenly changed. I called my doctor’s office and they recommended me to self-isolate for 14 days since this sounded like an upper respiratory infection. Another thing I did was documenting everywhere I have been the past week, just in case public health folks needed it for contact tracing.

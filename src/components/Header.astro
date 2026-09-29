@@ -1,78 +1,127 @@
 ---
 const pathname = Astro.url.pathname;
-const isHome = pathname === '/';
+const isHome = pathname === '/' || pathname.startsWith('/blog');
 const isAbout = pathname === '/about';
 ---
 
-<header class="header">
-  <div class="header-inner container">
-    <a href="/" class="logo">
-      <span class="logo-mark">mugizi.com</span>
-      <span class="logo-sub">jp mugizi &middot; Applied AI and Data Infra/Platform Engineer</span>
+<header class="sign">
+  <div class="sign-in wrap">
+    <span class="stripes" aria-hidden="true"><i></i><i></i><i></i></span>
+    <a href="/" class="station">
+      mugizi<i>.</i>com
+      <small>JP Mugizi &middot; Applied AI &amp; Data Platform Engineer</small>
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="/" class:list={['nav-link', { active: isHome }]}>writing</a>
-      <a href="/about" class:list={['nav-link', { active: isAbout }]}>about</a>
+      <a href="/" class:list={['nav-link', { active: isHome }]}>Writing</a>
+      <a href="/about" class:list={['nav-link', { active: isAbout }]}>About</a>
+      <button class="edition" type="button" data-theme-toggle>Night edition</button>
     </nav>
   </div>
 </header>
 
 <style>
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background-color: var(--bg);
-    border-bottom: 1px solid var(--ink);
+  .sign {
+    position: relative;
+    border-bottom: 3px solid var(--ink);
   }
-
-  .header-inner {
+  .sign::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -6px;
+    border-top: 1px solid var(--ink);
+  }
+  .sign-in {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    min-height: var(--header-height);
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
+    gap: 1rem;
+    padding: 0.95rem 0;
   }
+  .stripes { display: flex; gap: 3px; height: 2rem; }
+  .stripes i { width: 6px; border-radius: 1px; }
+  .stripes i:nth-child(1) { background: var(--eng); }
+  .stripes i:nth-child(2) { background: var(--career); }
+  .stripes i:nth-child(3) { background: var(--life); }
 
-  .logo {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    color: var(--ink);
-    line-height: 1.2;
+  .station {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1;
+    letter-spacing: -0.01em;
   }
-  .logo:hover { color: var(--mark); }
-  .logo-mark { font-weight: 700; letter-spacing: 0.02em; }
-  .logo-sub {
-    color: var(--muted);
-    font-size: 0.75rem;
-    font-weight: 400;
+  .station i { font-style: normal; color: var(--flag); }
+  .station small {
+    display: block;
+    margin-top: 0.3rem;
+    font: 500 0.82rem/1.2 var(--font-label);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--soft);
   }
 
   .nav {
+    margin-left: auto;
     display: flex;
-    gap: 1.25rem;
+    align-items: center;
+    gap: 1.4rem;
+    font: 500 0.9rem/1.3 var(--font-label);
+    letter-spacing: 0.04em;
   }
-  .nav-link {
+  /* padding gives a 44px-tall target; the underline is text-decoration so it stays tight to the word */
+  .nav-link, .edition {
+    padding: 0.85rem 0;
     color: var(--ink);
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    padding: 4px 2px;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+    text-decoration: underline transparent 1px;
+    text-underline-offset: 5px;
+    transition: color 0.15s, text-decoration-color 0.15s;
   }
-  .nav-link:hover { color: var(--mark); }
-  .nav-link.active {
-    color: var(--mark);
-    border-bottom-color: var(--mark);
+  .nav-link:hover, .edition:hover { color: var(--flag); text-decoration-color: var(--flag); }
+  .nav-link.active { text-decoration-color: var(--ink); }
+  .edition {
+    font: inherit;
+    letter-spacing: inherit;
+    background: none;
+    border: 0;
+    text-decoration-color: var(--ink);
+    cursor: pointer;
   }
 
   @media (max-width: 640px) {
-    .logo-sub { display: none; }
-    .header-inner { font-size: 0.75rem; }
+    .station { font-size: 1.45rem; }
+    .station small { display: none; }
+    .sign-in { gap: 0.75rem; }
+    .nav { gap: 0.9rem; font-size: 0.85rem; }
   }
 </style>
+
+<script>
+  const KEY = 'mz-theme';
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+
+  const isDark = () =>
+    (root.dataset.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')) === 'dark';
+  const sync = () => {
+    if (toggle) toggle.textContent = isDark() ? 'Day edition' : 'Night edition';
+  };
+
+  try {
+    const saved = localStorage.getItem(KEY);
+    if (saved === 'light' || saved === 'dark') root.dataset.theme = saved;
+  } catch {
+    // storage blocked: follow the system
+  }
+  sync();
+
+  toggle?.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem(KEY, next);
+    } catch {
+      // not persisted
+    }
+    sync();
+  });
+</script>

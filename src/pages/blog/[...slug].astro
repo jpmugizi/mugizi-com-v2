@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { lines, readingMinutes, titleParts, type Category } from '../../lib/lines';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -13,207 +14,172 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
-const formattedDate = post.data.date.toLocaleDateString('en-US', {
+const categories = post.data.categories as Category[];
+const minutes = readingMinutes(post.body ?? '');
+const dateLabel = post.data.date.toLocaleDateString('en-US', {
   day: 'numeric',
   month: 'long',
-  year: 'numeric'
+  year: 'numeric',
+  timeZone: 'UTC',
 });
-
-const categoryColors: Record<string, string> = {
-  engineering: 'var(--category-engineering)',
-  career: 'var(--category-career)',
-  life: 'var(--category-life)',
-};
-
-const primaryCategory = post.data.categories[0];
-const categoryColor = categoryColors[primaryCategory] || 'var(--terracotta)';
+const lineNames = categories.map((c) => lines[c].name).join(' & ');
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <article class="post" style={`--category-color: ${categoryColor}`}>
-    <header class="post-header">
-      <a href="/" class="back-link">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Back to writings
-      </a>
-
-      <div class="post-meta">
-        {post.data.categories.map((c, i) => (
-          <>
-            {i > 0 && <span class="category-sep">&middot;</span>}
-            <span class="category-badge">{c}</span>
-          </>
-        ))}
-        <span class="separator">|</span>
-        <time class="date" datetime={post.data.date.toISOString()}>{formattedDate}</time>
-      </div>
-
-      <h1 class="title">{post.data.title}</h1>
-
-      {post.data.description && (
-        <p class="description">{post.data.description}</p>
-      )}
+  <article class="essay">
+    <header class="essay-head">
+      <p class="line-tag label">
+        {categories.map((c) => <span class={`bullet ${c}`} aria-hidden="true">{lines[c].letter}</span>)}
+        {lineNames}
+      </p>
+      <h1>{titleParts(post.data.title).map((part, i) => (i % 2 ? <span class="nw">{part}</span> : part))}</h1>
+      {post.data.description && <p class="deck">{post.data.description}</p>}
+      <p class="byline">
+        <span>By <b>JP Mugizi</b></span>
+        <time datetime={post.data.date.toISOString()}>{dateLabel}</time>
+        <span>{minutes} min read</span>
+      </p>
     </header>
 
-    <div class="post-content prose">
+    <nav class="toc" aria-label="Sections of this essay" hidden>
+      <div class="toc-inner">
+        <div data-toc-list></div>
+      </div>
+    </nav>
+
+    <div class="body prose" data-post-body data-title={post.data.title}>
       <Content />
     </div>
 
-    <footer class="post-footer">
-      <div class="footer-divider"></div>
-      <div class="footer-content">
-        <p class="footer-text">Thanks for reading. If you found this useful, feel free to share it.</p>
-        <a href="/" class="footer-link">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Read more articles
-        </a>
-      </div>
-    </footer>
+    <p class="essay-foot"><a class="back label" href="/">Back to the line map</a></p>
   </article>
 </BaseLayout>
 
 <style>
-  .post {
-    padding-top: 2rem;
-    max-width: var(--content-width);
-    margin: 0 auto;
+  /* rail + text; the margin column only exists where notes and figures can use it */
+  .essay {
+    display: grid;
+    grid-template-columns: 12.5rem minmax(0, 40rem);
+    column-gap: 2.5rem;
+    justify-content: center;
+    padding-top: 2.75rem;
+  }
+  .essay-head { grid-column: 2; margin-bottom: 1.5rem; }
+  @media (min-width: 1240px) {
+    .essay { grid-template-columns: 12.5rem minmax(0, 40rem) 13rem; }
+    .essay-head { grid-column: 2 / -1; }
   }
 
-  .back-link {
+  .line-tag {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-    transition: color 0.2s ease;
+    gap: 0.4rem;
+    margin: 0 0 1rem;
+    color: var(--soft);
   }
+  .line-tag .bullet { width: 1.6rem; height: 1.6rem; font-size: 0.9rem; }
+  .line-tag .bullet:last-of-type { margin-right: 0.2rem; }
 
-  .back-link:hover {
-    color: var(--terracotta);
-    text-decoration: none;
+  h1 {
+    max-width: 40rem;
+    font-size: clamp(2.3rem, 5.4vw, 3.8rem);
+    line-height: 1.04;
+    letter-spacing: -0.012em;
   }
-
-  .post-header {
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--border-color);
+  .deck {
+    max-width: 36rem;
+    margin: 1.1rem 0 1.4rem;
+    font-size: 1.35rem;
+    line-height: 1.4;
+    font-style: italic;
+    color: var(--soft);
+    text-wrap: pretty;
   }
-
-  .post-meta {
+  .byline {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-
-  .category-badge {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    font-weight: 500;
+    flex-wrap: wrap;
+    gap: 0.3rem 0;
+    max-width: 40rem;
+    margin: 0;
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--hair);
+    font: 500 0.95rem/1.3 var(--font-label);
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--category-color);
-    background-color: color-mix(in srgb, var(--category-color) 10%, transparent);
-    padding: 0.25rem 0.625rem;
-    border-radius: 3px;
+    color: var(--soft);
   }
+  .byline b { color: var(--ink); }
+  .byline > :not(:last-child)::after { content: '\00b7'; margin: 0 0.7em; }
 
-  .separator {
-    color: var(--border-strong);
+  .body { grid-column: 2; grid-row: 2; min-width: 0; }
+  .toc { grid-column: 1; grid-row: 2; }
+  .toc[hidden] { display: none; }
+  .toc-inner { position: sticky; top: 2rem; }
+  .toc :global(ol) { list-style: none; margin: 0; padding: 0; }
+  .toc :global(li) { position: relative; padding: 0 0 1.35rem 1.75rem; }
+  .toc :global(li:last-child) { padding-bottom: 0; }
+  .toc :global(li::before) {
+    content: '';
+    position: absolute;
+    left: 0.55rem;
+    top: 0.8rem;
+    bottom: -0.3rem;
+    width: 4px;
+    margin-left: -2px;
+    background: var(--hair);
   }
-
-  .date {
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    color: var(--text-muted);
-    letter-spacing: 0.01em;
+  .toc :global(li:last-child::before) { display: none; }
+  .toc :global(li.is-past::before) { background: var(--flag); }
+  .toc :global(li::after) {
+    content: '';
+    position: absolute;
+    left: 0.55rem;
+    top: 0.3rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    margin-left: -0.4rem;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 3px solid var(--hair);
+    transition: transform 0.25s var(--ease-out-quart);
   }
-
-  .title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 400;
-    margin: 0 0 1rem 0;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+  .toc :global(li.is-past::after) { border-color: var(--flag); }
+  .toc :global(li.is-active::after) { border-color: var(--flag); background: var(--flag); transform: scale(1.35); }
+  .toc :global(button) {
+    all: unset;
+    cursor: pointer;
+    font: 500 0.95rem/1.3 var(--font-label);
+    letter-spacing: 0.02em;
+    color: var(--soft);
   }
+  .toc :global(li.is-active button) { color: var(--ink); font-weight: 700; }
+  .toc :global(button:hover) { color: var(--flag); }
+  .toc :global(button:focus-visible) { outline: 2px solid var(--flag); outline-offset: 3px; }
 
-  .description {
-    font-size: 1.1875rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin: 0;
-    max-width: 600px;
+  .essay-foot { grid-column: 2; padding: 1.5rem 0 5rem; }
+  .back { color: var(--flag); }
+  .back:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  @media (max-width: 1000px) {
+    .essay { grid-template-columns: minmax(0, 40rem); }
+    .essay-head, .body, .essay-foot { grid-column: 1; }
+    .toc { display: none; }
   }
-
-  .post-content {
-    max-width: 100%;
-  }
-
-  .post-footer {
-    margin-top: 4rem;
-  }
-
-  .footer-divider {
-    height: 1px;
-    background: linear-gradient(90deg, var(--category-color), transparent);
-    margin-bottom: 2rem;
-  }
-
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .footer-text {
-    font-size: 0.9375rem;
-    color: var(--text-secondary);
-    margin: 0;
-  }
-
-  .footer-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--terracotta);
-    white-space: nowrap;
-    transition: all 0.2s ease;
-  }
-
-  .footer-link:hover {
-    text-decoration: none;
-  }
-
-  .footer-link svg {
-    transition: transform 0.2s ease;
-  }
-
-  .footer-link:hover svg {
-    transform: translateX(-3px);
-  }
-
-  @media (max-width: 640px) {
-    .title {
-      font-size: 1.75rem;
-    }
-
-    .description {
-      font-size: 1.0625rem;
-    }
-
-    .footer-content {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-    }
+  @media (prefers-reduced-motion: reduce) {
+    .toc :global(li::after) { transition: none; }
   }
 </style>
+
+<script>
+  import { mountToc } from '../../scripts/toc';
+
+  const body = document.querySelector<HTMLElement>('[data-post-body]');
+  const toc = document.querySelector<HTMLElement>('.toc');
+  if (body && toc) mountToc(toc, body, body.dataset.title ?? '');
+
+  const maps = body?.querySelectorAll<HTMLElement>('[data-subway]') ?? [];
+  if (maps.length) {
+    import('../../scripts/subway').then((m) => maps.forEach((el) => m.mountSubway(el)));
+  }
+</script>

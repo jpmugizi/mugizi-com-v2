@@ -1,11 +1,16 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import '@fontsource-variable/newsreader';
-import '@fontsource-variable/newsreader/wght-italic.css';
+import '@fontsource/old-standard-tt/400.css';
+import '@fontsource/old-standard-tt/400-italic.css';
+import '@fontsource/old-standard-tt/700.css';
+import '@fontsource-variable/source-serif-4/opsz.css';
+import '@fontsource-variable/source-serif-4/opsz-italic.css';
+import '@fontsource/archivo-narrow/400.css';
+import '@fontsource/archivo-narrow/500.css';
+import '@fontsource/archivo-narrow/600.css';
+import '@fontsource/archivo-narrow/700.css';
 import '@fontsource/jetbrains-mono/400.css';
-import '@fontsource/jetbrains-mono/500.css';
-import '@fontsource/jetbrains-mono/600.css';
 import '../styles/global.css';
 
 interface Props {
@@ -28,12 +33,12 @@ const fullTitle = title === 'mugizi' ? title : `${title} | mugizi`;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#faf4ed" />
+    <meta name="theme-color" content="#f6eeee" />
     <title>{fullTitle}</title>
   </head>
   <body>
     <Header />
-    <main class="container">
+    <main class="wrap">
       <slot />
     </main>
     <Footer />
